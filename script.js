@@ -4,22 +4,25 @@ let displayArea = document.querySelector('#display-area');
 let BIN_ID = '6980db4e43b1c97be9601c5c';
 let URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/latest`;
 
-fetchBtn.onclick = async () => {
+fetchBtn.onclick = () => {
     displayArea.innerHTML = '<p>Venturing into the wild...</p>';
-    
-    try {
-        let response = await fetch(URL);
-        let data = await response.json();
-        
-        let animals = data.record; 
 
-        let animal = animals[Math.floor(Math.random() * animals.length)];
-
-        renderAnimalCard(animal);
-    } catch (error) {
-        displayArea.innerHTML = '<p>The animals are hiding. Try again later.</p>';
-        console.error("Fetch Error:", error);
-    }
+    fetch(URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            let animals = data.record;
+            let animal = animals[Math.floor(Math.random() * animals.length)];
+            renderAnimalCard(animal);
+        })
+        .catch(error => {
+            displayArea.innerHTML = '<p>The animals are hiding. Try again later.</p>';
+            console.error("Fetch Error:", error);
+        });
 };
 
 function renderAnimalCard(obj) {
