@@ -15,7 +15,7 @@ An interactive, client-side web app that explores wildlife data. Discover animal
 
 ## 🧠 Technical Highlights
 - **DOM querying** with `querySelector` for UI targets.
-- **DOM manipulation** to inject content and adjust styles.
+- **DOM manipulation** to inject content such as div's and other needed styles for the animal box and adjust styles.
 - **Event handling** using `onclick` to drive the app flow.
 - **Data mapping** from JSON to UI components.
 
